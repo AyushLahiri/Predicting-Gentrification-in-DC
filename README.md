@@ -62,4 +62,6 @@ Other possible correlations are summarised below:
 
 ## Results : Clustering 
 
+We plot the average values of each of the clusters, against the DC average: 
+![](./assets/DC_affordable.png) ![](./assets/DC_gentrifying.png)
 

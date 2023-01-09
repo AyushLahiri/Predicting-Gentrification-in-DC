@@ -33,16 +33,16 @@ While there is much debate on the definition of gentrification, the general patt
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------Before clustering we discuss some interesting insights: 
 
-![](./assets/black_median_housing.png)
+![Figure 1](./assets/black_median_housing.png)
 
 We see that median housing values are generally decreasing with increase in housing values in a given year. More interestingly over time areas with lower populations Black population, the number of high median housing value increases and subsequently free of relatively lower median house value tracts decreases with increased proportions of black populations. This may indicate towards the existence of  a racial dimension in understanding gentrification for the case of Washington DC. 
 
-![](./assets/median_rent_home.png)
+![Figure 2](./assets/median_rent_home.png)
 
 Median housing value and rent are clearly correlated as one expects.However over time instances of median housing for a given median rent being higher than previous years and the other way round for median rent , highlights that over time rent and home values are not moving together. This indicates that there maybe a need for separate variables for housing and rent in clusters. 
 
 Other possible correlations are summarised below:
-![](./assets/correlogram.png)
+![Figure 3](./assets/correlogram.png)
 
 ## Unsupervised learning: Hierarchical Clustering 
 - Our feature list before we proceed to cluster are as follows: (note: % changes are b/w 2000 and 2021)
@@ -63,20 +63,20 @@ Other possible correlations are summarised below:
 ## Results : Clustering 
 
 We plot the average values of each of the clusters, against the DC average. Once again we emphasize, that the "affordable" tract does not imply housing prices being affordable. The initial.final housing prices may still be high. These tracts only become affordable with respect to % change in price and rent values: 
-![](./assets/DC_stable.png) ![](./assets/DC_affordable.png) ![](./assets/DC_gentrifying.png) ![](./assets/DC_intense_gentrification.png) 
+![Figure 4](./assets/DC_stable.png) ![](./assets/DC_affordable.png) ![](./assets/DC_gentrifying.png) ![](./assets/DC_intense_gentrification.png) 
 
 Comparing the average values across tracts:
-![](./assets/clustering_barplot.png)
+![Figure 5](./assets/clustering_barplot.png)
 
 We observe that the clustering algorithm has created distinct clusters which exhibit differing neighborhood patterns. 
 In out case "Gentrifying" and "Intense Gentrification", are those that show a much bigger decrease in propotion of none whites, much higher increases in median housing and/or rent as compared to the DC average. Finally, per capita change in incomes are much more increasing for these tracts.Gentrifying tracts have a much large change in proportion of bachelors+ population than intensely gentrifying tracts but lower changes in income per capita, median housing and rent values as compared to intensely gentrifying tracts. A possibility is that the recent influx of bachelors+ population in the "gentrifying" tracts will over time push these tracts into "intense gentrification."
 
 ## Spatially visualizing our clusters: 
-![](./assets/clustering_map.png)
+![Figure 6](./assets/clustering_map.png)
 
 Interestingly, many of the gentrifying/intensely gentrifying tracts correlate with the tracts of DC with the higher proportion of Black population, clearly indicating a racial dimension to gentrification. For DC natives, gentrification as seen between 2012 and 2021, has a strong concentration east of the Anacostsia river, may sound familiar, given ward 7 and 8s already identified risk of being gentrified
 
-![](./assets/map_race.png)
+![Figure 7](./assets/map_race.png)
 
 ## Supervised Learning 
 ### Random Forest 
@@ -96,10 +96,10 @@ I now attempt to predict the probability of gentrification of a census tract ove
   8. % unemployed 
   9. Average per-capita income
 - Visualizing some of the variables and how they are spread for each label: 
-![](./assets/boxplot.png)
+![Figure 8](./assets/boxplot.png)
 
 - Importantly we see the per capita income spread. As noted previous, "affordable" tracks are not necessarily ones with lower property values and are ones with the highest per capita average incomes, indicating that some the most expensive housing tracts in DC, saw lowest overall changes in housing prices and per capita income in the neighborhood and also saw the highest increases in diversity in their population. 
-![](./assets/pcap_income.png)
+![Figure 9](./assets/pcap_income.png)
 
 - We binary encode our gentrification labels: 
   1. Affordable and stable tracks coded as 0, implying "Not Gentrifying" 
@@ -109,14 +109,28 @@ Because of the class imbalance and low percentage of true positive classes, some
 such as accuracy. Additionally, a consideration of the problem context will help evaluate the usefulness of the model. Similar to fraud or medical diagnoses, there may be few positive cases, but a high cost associated with a false negative prediction. In this context, that is predicting a census tract will not gentrify when it actually does gentrify. In such cases where the cost of false negatives is high, recall/sensitivity is a valuable metric.
 
 ### Performance Metrics of random forest
+We achieve higher than standard accuracy metrics for such problems of class imbalance. Specifically a high balanced accuracy is an important metric in this case since it attempts to minimize the bias towards the more frequent class by averaging both class accuracies. Further, the priorly mentioned important consideration of false negatives, is also ameliorated with a recall metric of 95%. 
+
 - Training accuracy: 0.959
 - Testing accuracy: 0.870
 - Balanced Testing accuracy: 0.919
 - F1: 0.911
 - Recall: 0.951
 - Precision: 0.877
+![Figure 10](./assets/cm.png)
 
-We achieve higher than standard accuracy metrics for such problems of class imbalance. Specifically a high balanced accuracy is an important metric in this case since it attempts to minimize the bias towards the more frequent class by averaging both class accuracies. Further, the priorly mentioned important consideration of false negatives, is also ameliorated with a recall metric of 95%. 
+### Feature importance 
+The RF model learned heavily from labeled data that the majority of gentrifying tracts were those with low per capita income. Additionally, poverty, and employment, and vacancy rates were shown to be informative variables regarding the predicted outcome of gentrification. Less important variables were proportion of long term residence, old housing stock and percentage of renters. 
+![](./assets/imp.png)
 
-Below we look at the results of a track becoming gentrified by 2021, based on 2000 tract data. 
+## Probability of tracts gentrifying in 2021. 
+Below we look at the probability of a track becoming gentrified by 2021, based on 2000 tract data (on which the machine was trained and tested).
+![Figure 11](./assets/probability.png)
+We find that the machine has to some degree more false positives as compared to the labels in figure 6. Most of the predictions, forecasting >50% chance of gentrification focuses on the region east of the Anacostsia. Specifically, ward 7 and ward 8 have been correctly identified at a high risk of gentrification, an important issue currently. 
+
+## Final Use case: Which tracts will be gentrified in 2030
+Below we look at the probability of a track becoming gentrified by 2030, based on 2021 tract data 
+![Figure 11](./assets/probability2031.png)
+
+Many of the previously identified areas continue to be identified as gentrified, especially east of the Anacostsia. This is expected, since gentrification often happens over a span of 20-30 years. A few new areas have also been identified, but more importantly many of the areas currently idetified as gentrifying have not been highlighted to be so in 2030, indicating that they will be fully gentrified and become high income areas. It is therefore important to carefully evaluate these changing patterns and undertake interventions such as te Minneapolis 2040 plan, which aim to create "mixed" neighborhoods, to reduce population displacement. 
 

@@ -83,7 +83,7 @@ Interestingly, many of the gentrifying/intensely gentrifying tracts correlate wi
 I now attempt to predict the probability of gentrification of a census tract over a 10 year horizon. We first predict on demographic data for tracts in the year 2000, using our output label as the clusters determined by hierarchical clutering previously.
 
 ## Methodology
-- A random forest is used. Due to the class imbalance in the data set (19% as gentrifying), we generate synthetic data from the minority class in the training set using Synthetic Minority Oversampling Technique (SMOTE). 
+- **A random forest is used. Due to the class imbalance in the data set (19% as gentrifying), we generate synthetic data from the minority class in the training set using Synthetic Minority Oversampling Technique (SMOTE).**
 - Our feature selection is based on what initial characteristics a tract may have, that may qualify it for "gentrification" over the next 10 years. We use the following variables for the tracts in the year 2000, to predict labels ( which itself have been predicted based on a 10-year change). 
 - Features in random forest
   1. % of reisdent 65+ 
@@ -95,5 +95,28 @@ I now attempt to predict the probability of gentrification of a census tract ove
   7. % of renters 
   8. % unemployed 
   9. Average per-capita income
-- 
+- Visualizing some of the variables and how they are spread for each label: 
+![](./assets/boxplot.png)
+
+- Importantly we see the per capita income spread. As noted previous, "affordable" tracks are not necessarily ones with lower property values and are ones with the highest per capita average incomes, indicating that some the most expensive housing tracts in DC, saw lowest overall changes in housing prices and per capita income in the neighborhood and also saw the highest increases in diversity in their population. 
+![](./assets/pcap_income.png)
+
+- We binary encode our gentrification labels: 
+  1. Affordable and stable tracks coded as 0, implying "Not Gentrifying" 
+  2. Gentrifying and intense gentrification tracks, coded as 1, implying "Gentrifying" 
+  
+Because of the class imbalance and low percentage of true positive classes, some of the metrics are more representative of model performance than traditional metrics
+such as accuracy. Additionally, a consideration of the problem context will help evaluate the usefulness of the model. Similar to fraud or medical diagnoses, there may be few positive cases, but a high cost associated with a false negative prediction. In this context, that is predicting a census tract will not gentrify when it actually does gentrify. In such cases where the cost of false negatives is high, recall/sensitivity is a valuable metric.
+
+### Performance Metrics of random forest
+- Training accuracy: 0.959
+- Testing accuracy: 0.870
+- Balanced Testing accuracy: 0.919
+- F1: 0.911
+- Recall: 0.951
+- Precision: 0.877
+
+We achieve higher than standard accuracy metrics for such problems of class imbalance. Specifically a high balanced accuracy is an important metric in this case since it attempts to minimize the bias towards the more frequent class by averaging both class accuracies. Further, the priorly mentioned important consideration of false negatives, is also ameliorated with a recall metric of 95%. 
+
+Below we look at the results of a track becoming gentrified by 2021, based on 2000 tract data. 
 

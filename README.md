@@ -62,6 +62,10 @@ Other possible correlations are summarised below:
 
 ## Results : Clustering 
 
-We plot the average values of each of the clusters, against the DC average: 
-![](./assets/DC_affordable.png) ![](./assets/DC_gentrifying.png)
+We plot the average values of each of the clusters, against the DC average. Once again we emphasize, that the "affordable" tract does not imply housing prices being affordable. The initial.final housing prices may still be high. These tracts only become affordable with respect to % change in price and rent values: 
+![](./assets/DC_stable.png) ![](./assets/DC_affordable.png) ![](./assets/DC_gentrifying.png) ![](./assets/DC_intense_gentrification.png) 
+
+Comparing the average values across tracts:
+![](./assets/clustering_barplot.png)
+
 

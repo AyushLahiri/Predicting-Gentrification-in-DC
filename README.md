@@ -33,7 +33,7 @@ While there is much debate on the definition of gentrification, the general patt
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------Before clustering we discuss some interesting insights: 
 
-![](./assets/black_median housing.png)
+(./assets/black_median housing.png)
 
 We see that median housing values are generally decreasing with increase in housing values in a given year. More interestingly over time areas with lower populations Black population, the number of high median housing value increases and subsequently free of relatively lower median house value tracts decreases with increased proportions of black populations. This may indicate towards the existence of  a racial dimension in understanding gentrification for the case of Washington DC. 
 

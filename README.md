@@ -74,5 +74,6 @@ In out case "Gentrifying" and "Intense Gentrification", are those that show a mu
 ## Spatially visualizing our clusters: 
 ![](./assets/clustering_map.png)
 
-Interestingly, many of the gentrifying/intensely gentrifying tracts correlate with the tracts of DC with the highest proportion of Black population, clearly indicating a racial dimension to gentrification.
+Interestingly, many of the gentrifying/intensely gentrifying tracts correlate with the tracts of DC with the higher proportion of Black population, clearly indicating a racial dimension to gentrification. For DC natives, gentrification as seen between 2012 and 2021, have a strong concentration east of the Anacostsia river, may sound familiar, given ward 7 and 8s already identified risk of being gentrified
+
 ![](./assets/map_race.png)

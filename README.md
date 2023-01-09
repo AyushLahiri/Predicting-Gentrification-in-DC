@@ -74,6 +74,26 @@ In out case "Gentrifying" and "Intense Gentrification", are those that show a mu
 ## Spatially visualizing our clusters: 
 ![](./assets/clustering_map.png)
 
-Interestingly, many of the gentrifying/intensely gentrifying tracts correlate with the tracts of DC with the higher proportion of Black population, clearly indicating a racial dimension to gentrification. For DC natives, gentrification as seen between 2012 and 2021, have a strong concentration east of the Anacostsia river, may sound familiar, given ward 7 and 8s already identified risk of being gentrified
+Interestingly, many of the gentrifying/intensely gentrifying tracts correlate with the tracts of DC with the higher proportion of Black population, clearly indicating a racial dimension to gentrification. For DC natives, gentrification as seen between 2012 and 2021, has a strong concentration east of the Anacostsia river, may sound familiar, given ward 7 and 8s already identified risk of being gentrified
 
 ![](./assets/map_race.png)
+
+## Supervised Learning 
+### Random Forest 
+I now attempt to predict the probability of gentrification of a census tract over a 10 year horizon. We first predict on demographic data for tracts in the year 2000, using our output label as the clusters determined by hierarchical clutering previously.
+
+## Methodology
+- A random forest is used. Due to the class imbalance in the data set (19% as gentrifying), we generate synthetic data from the minority class in the training set using Synthetic Minority Oversampling Technique (SMOTE). 
+- Our feature selection is based on what initial characteristics a tract may have, that may qualify it for "gentrification" over the next 10 years. We use the following variables for the tracts in the year 2000, to predict labels ( which itself have been predicted based on a 10-year change). 
+- Features in random forest
+  1. % of reisdent 65+ 
+  2. % of residents below the poverty line 
+  3. % of long term residents in the tract 
+  4. % of vacant houses 
+  5. % of aging housing stock (older than 1980)
+  6. % of renters rent burdened 
+  7. % of renters 
+  8. % unemployed 
+  9. Average per-capita income
+- 
+

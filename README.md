@@ -4,6 +4,6 @@
 ## Execution
  - Obtain a census API key: https://api.census.gov/data/key_signup.html
  - Run notebooks in the following order 
-    1. `Data_preparation.ipynb'
+    1. [`Data_preparation.ipynb`]
     2. `Hierarchical_clustering.ipynb'
     3. `Random_Forest.ipynb'

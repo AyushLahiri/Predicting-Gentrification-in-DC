@@ -14,21 +14,40 @@ Gentrification is a legacy of historical patterns of residential restructuring t
 While there is much debate on the definition of gentrification, the general patterns from a spacial point view does provide a succint definition: A sustained period of disinvestment, followed by an influx of investment and wealthier residents, in some cases correlated with race,  that results in the displacement of existing residents
 
 ## Data 
-American community survey's 5-year estimates(2012-2021): https://www.census.gov/data/developers/data-sets/acs-5year.html
+- American community survey's 5-year estimates(2012-2021): https://www.census.gov/data/developers/data-sets/acs-5year.html
+- Method: API 
+- Geography: Census Tract level 
+- We are primarily interested in the variables literature suggests as "descriptive" of gentrification. These are 
+    - Home values
+    - Bachelor's+ educated population
+    - Income. 
+- Alongside, due to the increasingly stark spatial divide between races in DC, we are also interested in the proportion of non-white racial demograph, in a census tract and whether they also may show a pattern in the clusters 
+- We further, separate  home value and rents as separate features, given an increasingly common phenomena of rents often increasing faster than home values as new wealthy / potentially wealthy ( recent college graduates) residents occupy a new neighborhood. 
+
+## Pre-Processing 
+- We drop census tracts wih populations below or equal to zero 
+- We obtain multiple categorical values that require to be aggregated. For example, our raw data set has one variable indicating those with bachelors degrees, another variable with masters degree and so on. These variables need to be added for an aggregate population, classified as bachelors+
+- We then create multiple per capita indicators. 
+- We finally inflation adjust to 2021 all variables with monetary values. 
+- We then utilise multiple imputation to fill missing values, since our final data set would be comparatively small. We will have each row = a census tract and DC has 154 census tracts, as our final dataset. Further, imputation is necessary, so that we do not drop potentially gentrifying tracts, since we expect the data to be highly imbalanced for gentrifying and non gentrifying tracts. 
 
 
 
-## The problem 
-Before proceeding with using supervised learning algorithms , to predict gentrification in DC, we face a fundamental problem. i.e. WHAT IS GENTRIFICATION. 
-The answer to this complex, frequently disagreed upon and one dimensional. We therefore intend to this problem through unsupervised learning, to generate our own classification of gentrification.
+## Clustering 
+- Our feature list before we proceed to cluster are as follows: (note: % changes are b/w 2000 and 2021)
+    1. % Change in porportion of non whites 
+    2. % Change in per capita income 
+    3. % Change in proportion of bachelor's+ educated population 
+    4. % Change in Median housing value 
+    5. % Change in Median rent 
+- Our final dataset is relatively sparse consisting of 150 census tracts. 
+- Given a small dataset and our goal to identify the most similar observations to a given data point, hierarchical agglomerative clustering is used. 
+- We finally select 4 clusters for interpretability. These are: 
+   1. Stable: Those tracts whose changes are most clost to the DC average
+   2. Gentrifying: Those areas which have begin to show early signs of gentrification. 
+   3. Intense gentrfication: Areas which show strong signs of gentrification accross all variables 
+   4. Affordable: Those areas where signs of gentrification are lower than the DC average. 
+           - Please note: The label "Affordable" may prompt you to visualise an "affordable" neighborhood, i.e. an area where prices are low. That is not the case here. Affordable is only classifying the "change" in prices as compared to DC. The initial and/or final prices may still be high, indicating minimal change in prices in a high income neighborhood. 
 
-## Methodology 
-There primarily exists three definitions in the literature to identify gentrification. Summarized below 
-These definitions while rather different from one another, also fail to characterize the socio-economic complexities that exist in the context of gentrification. While neither unimportant, their discreet sensitive values and inability to capture the problem on multiple dimensions makes them sub-optimal methods of classification. 
-I therefore use these definitions in tandem with clustering, a type of unsupervised machine learning technique used to distinguish underlying patterns and similarities among multiple features. In the context of urban change, it can be used to distinguish the dominant trajectories of neighborhood change over time. 
-
-Clustering techniques bypass many of the limitations and bias of traditional threshold-based methods. Clustering methods optimize the homogenous subgrouping from the data itself, rather than from a predetermined framework. They also afford the inclusion of additional variables that are able to
-capture the multi-dimensionality of neighborhood change. These methods are also less biased than
-their prescriptive counterparts. 
-
+## Results : Clustering 
 

@@ -44,7 +44,7 @@ Median housing value and rent are clearly correlated as one expects.However over
 Other possible correlations are summarised below:
 ![](./assets/correlogram.png)
 
-## Clustering 
+## Unsupervised learning: Hierarchical Clustering 
 - Our feature list before we proceed to cluster are as follows: (note: % changes are b/w 2000 and 2021)
     1. % Change in porportion of non whites 
     2. % Change in per capita income 
@@ -68,4 +68,11 @@ We plot the average values of each of the clusters, against the DC average. Once
 Comparing the average values across tracts:
 ![](./assets/clustering_barplot.png)
 
+We observe that the clustering algorithm has created distinct clusters which exhibit differing neighborhood patterns. 
+In out case "Gentrifying" and "Intense Gentrification", are those that show a much bigger decrease in propotion of none whites, much higher increases in median housing and/or rent as compared to the DC average. Finally, per capita change in incomes are much more increasing for these tracts.Gentrifying tracts have a much large change in proportion of bachelors+ population than intensely gentrifying tracts but lower changes in income per capita, median housing and rent values as compared to intensely gentrifying tracts. A possibility is that the recent influx of bachelors+ population in the "gentrifying" tracts will over time push these tracts into "intense gentrification."
 
+## Spatially visualizing our clusters: 
+![](./assets/clustering_map.png)
+
+Interestingly, many of the gentrifying/intensely gentrifying tracts correlate with the tracts of DC with the highest proportion of Black population, clearly indicating a racial dimension to gentrification.
+![](./assets/map_race.png)

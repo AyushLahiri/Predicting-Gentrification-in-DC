@@ -31,7 +31,16 @@ While there is much debate on the definition of gentrification, the general patt
 - We finally inflation adjust to 2021 all variables with monetary values. 
 - We then utilise multiple imputation to fill missing values, since our final data set would be comparatively small. We will have each row = a census tract and DC has 154 census tracts, as our final dataset. Further, imputation is necessary, so that we do not drop potentially gentrifying tracts, since we expect the data to be highly imbalanced for gentrifying and non gentrifying tracts. 
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------Before clustering we discuss some interesting insights: 
 
+![](./Assets/black and median housing values.png)
+We see that median housing values are generally decreasing with increase in housing values in a given year. More interestingly over time areas with lower populations Black population, the number of high median housing value increases and subsequently free of relatively lower median house value tracts decreases with increased proportions of black populations. This may indicate towards the existence of  a racial dimension in understanding gentrification for the case of Washington DC. 
+
+![](./Assets/median rent vs home.png)
+Median housing value and rent are clearly correlated as one expects.However over time instances of median housing for a given median rent being higher than previous years and the other way round for median rent , highlights that over time rent and home values are not moving together. This indicates that there maybe a need for separate variables for housing and rent in clusters. 
+
+Other possible correlations are summarised below:
+![](./Assets/correlogram.png)
 
 ## Clustering 
 - Our feature list before we proceed to cluster are as follows: (note: % changes are b/w 2000 and 2021)
@@ -50,4 +59,5 @@ While there is much debate on the definition of gentrification, the general patt
            - Please note: The label "Affordable" may prompt you to visualise an "affordable" neighborhood, i.e. an area where prices are low. That is not the case here. Affordable is only classifying the "change" in prices as compared to DC. The initial and/or final prices may still be high, indicating minimal change in prices in a high income neighborhood. 
 
 ## Results : Clustering 
+
 

@@ -89,7 +89,7 @@ In our case "Gentrifying" and "Intense Gentrification", are those that show a mu
 ## Spatially visualizing our clusters: 
 ![Figure 6](./assets/clustering_map.png)
 
-Interestingly, many of the gentrifying/intensely gentrifying tracts correlate with the tracts of DC with the higher proportion of Black population, clearly indicating a racial dimension to gentrification. For DC natives, gentrification as seen between 2012 and 2021, has a strong concentration east of the Anacostsia river, may sound familiar, given ward 7 and 8s already identified risk of being gentrified
+Interestingly, many of the gentrifying/intensely gentrifying tracts correlate with the tracts of DC with the higher proportion of Black population, clearly indicating a racial dimension to gentrification. For DC natives, gentrification as seen between 2012 and 2021, is strongly  concentrated east of the Anacostsia river which may sound familiar, given ward 7 and 8s continued identification of being at risk for gentrification.
 
 ![Figure 7](./assets/map_race.png)
 
@@ -115,7 +115,7 @@ I now attempt to predict the probability of gentrification of a census tract ove
 - 
 ![Figure 8](./assets/boxplot.png)
 
-- Importantly we see the per capita income spread. As noted previous, "affordable" tracks are not necessarily ones with lower property values and are ones with the highest per capita average incomes, indicating that some the most expensive housing tracts in DC, saw lowest overall changes in housing prices and per capita income in the neighborhood and also saw the highest increases in diversity in their population. 
+- Importantly we see the per capita income spread below. As noted previous, "affordable" tracks are not necessarily ones with lower property values and are in fact ones with the highest per capita average incomes, indicating these high income tracts, saw the lowest overall changes in housing prices and per capita income in DC and from our clustering analysis, these areas also saw the highest increases in diversity in their population. 
 
 ![Figure 9](./assets/pcap_income.png)
 

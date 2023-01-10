@@ -22,7 +22,7 @@ Most of the disagreement in gentrification surrounds the methodological differen
 wants to better understand, predict and even alter changes in urban neighborhoods, one thus must be exceedingly careful in operationally specifying the exact dynamic in question, and must recognize that such a specification may, in itself, influence the outcome of the analysis." 
 The table below highlights the differences in the primarily used methods of identifying gentrification.
 
-(./assets/gent_df.png)
+![Figure 1](./assets/gent_df.png)
 
 In addition to the inconsistent metrics applied within these frameworks, there are issues of confirmation bias and limits to the number of dimensions that they are capable of capturing. These prescriptive, threshold approaches suffer from confirmation bias by assuming a priori that gentrification is a significant neighborhood-shaping process within the region and time period of interest
 

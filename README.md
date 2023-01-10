@@ -44,7 +44,7 @@ In addition to the inconsistent metrics applied within these frameworks, there a
 - We finally inflation adjust to 2021 all variables with monetary values. 
 - We then utilise multiple imputation to fill missing values, since our final data set would be comparatively small. We will have each row = a census tract and DC has 154 census tracts, as our final dataset. Further, imputation is necessary, so that we do not drop potentially gentrifying tracts, since we expect the data to be highly imbalanced for gentrifying and non gentrifying tracts. 
 
-------------------------------------------------------------------------------------------------------------------------------------------Before clustering we discuss some interesting insights: 
+---------------------------------------------------------------------------------------------------------------------------------------------------Before clustering we discuss some interesting insights: 
 
 ![Figure 1](./assets/black_median_housing.png)
 

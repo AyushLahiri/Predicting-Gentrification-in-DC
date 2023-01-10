@@ -99,6 +99,19 @@ I now attempt to predict the probability of gentrification of a census tract ove
 - **A random forest is used. Due to the class imbalance in the data set (19% as gentrifying), we generate synthetic data from the minority class in the training set using Synthetic Minority Oversampling Technique (SMOTE).**
 - Our feature selection is based on what initial characteristics a tract may have, that may qualify it for "gentrification" over the next 10 years. We use the following variables for the tracts in the year 2000, to predict labels ( which itself have been predicted based on a 10-year change). 
 - Features in random forest
+Feature Name  |
+------------- |
+% of reisdent 65+ |
+% of residents below the poverty line|
+% of long term residents in the tract|
+% of vacant houses|
+% of aging housing stock (older than 1980)|
+% of renters rent burdened|
+% of renters|
+% unemployed|
+Average per-capita income |
+Content Cell |
+
   1. % of reisdent 65+ 
   2. % of residents below the poverty line 
   3. % of long term residents in the tract 

@@ -135,6 +135,7 @@ We achieve higher than standard accuracy metrics for such problems of class imba
 - F1: 0.911
 - Recall: 0.951
 - Precision: 0.877
+
 ![Figure 10](./assets/cm.png)
 
 ### Feature importance 

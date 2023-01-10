@@ -110,7 +110,7 @@ I now attempt to predict the probability of gentrification of a census tract ove
   7. % of renters 
   8. % unemployed 
   9. Average per-capita income
-  10. 
+  
 - Visualizing some of the variables and how they are spread for each label: 
 - 
 ![Figure 8](./assets/boxplot.png)
@@ -143,11 +143,14 @@ The RF model learned heavily from labeled data that the majority of gentrifying 
 
 ## Probability of tracts gentrifying in 2021. 
 Below we look at the probability of a track becoming gentrified by 2021, based on 2000 tract data (on which the machine was trained and tested).
+
 ![Figure 11](./assets/probability.png)
+
 We find that the machine has to some degree more false positives as compared to the labels in figure 6. Most of the predictions, forecasting >50% chance of gentrification focuses on the region east of the Anacostsia. Specifically, multiple tracts in ward 7 and ward 8 have been correctly identified at a high risk of gentrification, an important issue currently. 
 
 ## Final Use case: Which tracts will be gentrified in 2030
 Below we look at the probability of a track becoming gentrified by 2030, based on 2021 tract data 
+
 ![Figure 11](./assets/probability2031.png)
 
 Many of the previously identified areas continue to be identified as gentrified, especially east of the Anacostsia. This is expected, since gentrification often happens over a span of 20-30 years. A few new areas have also been identified, but more importantly many of the areas currently idetified as gentrifying have not been highlighted to be so in 2030, indicating that they will be fully gentrified and become high income areas. It is therefore important to carefully evaluate these changing patterns and undertake interventions such as te Minneapolis 2040 plan, which aim to create "mixed" neighborhoods, to reduce population displacement. These areas provide important insights which require not only government interventions, but provide an important agenda to local neighborhood advocates, as an early warning sign.

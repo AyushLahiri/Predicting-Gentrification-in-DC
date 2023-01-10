@@ -39,10 +39,10 @@ In addition to the inconsistent metrics applied within these frameworks, there a
 
 ## Pre-Processing 
 - We drop census tracts wih populations below or equal to zero 
-- We obtain multiple categorical values that require to be aggregated. For example, our raw data set has one variable indicating those with bachelors degrees, another variable with masters degree and so on. These variables need to be added for an aggregate population, classified as bachelors+
+- We obtain multiple categorical values that require to be aggregated. For example, our raw data set has separate variables indicating those with bachelors degrees, masters degree etc. These variables need to be added for an aggregate population, which is classified as bachelors+
 - We then create multiple per capita indicators. 
 - We finally inflation adjust to 2021 all variables with monetary values. 
-- We then utilise multiple imputation to fill missing values, since our final data set would be comparatively small. We will have each row = a census tract and DC has 154 census tracts, as our final dataset. Further, imputation is necessary, so that we do not drop potentially gentrifying tracts, since we expect the data to be highly imbalanced for gentrifying and non gentrifying tracts. 
+- We then utilise multiple imputation to fill missing values, since our final data set would be comparatively small. We will have each row = a census tract and DC has 153 census tracts. Further, imputation is necessary, so that we do not drop potentially gentrifying tracts, since we expect the data to be highly imbalanced for gentrifying and non gentrifying tracts. 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------Before clustering we discuss some interesting insights: 
 
@@ -64,25 +64,27 @@ Other possible correlations are summarised below:
     3. % Change in proportion of bachelor's+ educated population 
     4. % Change in Median housing value 
     5. % Change in Median rent 
-- Our final dataset is relatively sparse consisting of 150 census tracts. 
+- Our final dataset is relatively sparse consisting of 151 census tracts. 
 - Given a small dataset and our goal to identify the most similar observations to a given data point, hierarchical agglomerative clustering is used. 
 - We finally select 4 clusters for interpretability. These are: 
-   1. Stable: Those tracts whose changes are most clost to the DC average
+   1. City Average: Those tracts whose changes are most clost to the DC average
    2. Gentrifying: Those areas which have begin to show early signs of gentrification. 
    3. Intense gentrfication: Areas which show strong signs of gentrification accross all variables 
    4. Affordable: Those areas where signs of gentrification are lower than the DC average. 
-           - Please note: The label "Affordable" may prompt you to visualise an "affordable" neighborhood, i.e. an area where prices are low. That is not the case here. Affordable is only classifying the "change" in prices as compared to DC. The initial and/or final prices may still be high, indicating minimal change in prices in a high income neighborhood. 
+           - _Please note: The label "Affordable" may prompt you to visualise an "affordable" neighborhood, i.e. an area where prices are low. That is not the case here. Affordable is only classifying the "change" in prices as compared to DC. The initial and/or final prices may still be high, indicating minimal change in prices in a high income neighborhood_ 
 
 ## Results : Clustering 
 
-We plot the average values of each of the clusters, against the DC average. Once again we emphasize, that the "affordable" tract does not imply housing prices being affordable. The initial.final housing prices may still be high. These tracts only become affordable with respect to % change in price and rent values: 
+We plot the average values of each of the clusters, against the DC average. Once again we emphasize, that the "affordable" tract does not imply housing prices being affordable. The initial/final housing prices may still be high, however the change in prices may be lower than that of DC. 
+
 ![Figure 4](./assets/DC_stable.png) ![](./assets/DC_affordable.png) ![](./assets/DC_gentrifying.png) ![](./assets/DC_intense_gentrification.png) 
 
 Comparing the average values across tracts:
+
 ![Figure 5](./assets/clustering_barplot.png)
 
 We observe that the clustering algorithm has created distinct clusters which exhibit differing neighborhood patterns. 
-In out case "Gentrifying" and "Intense Gentrification", are those that show a much bigger decrease in propotion of none whites, much higher increases in median housing and/or rent as compared to the DC average. Finally, per capita change in incomes are much more increasing for these tracts.Gentrifying tracts have a much large change in proportion of bachelors+ population than intensely gentrifying tracts but lower changes in income per capita, median housing and rent values as compared to intensely gentrifying tracts. A possibility is that the recent influx of bachelors+ population in the "gentrifying" tracts will over time push these tracts into "intense gentrification."
+In our case "Gentrifying" and "Intense Gentrification", are those that show a much bigger decrease in propotion of none whites, much higher increases in median housing and/or rent as compared to the DC average (almost 2x). Finally, per capita change in income is increasing much more for these tracts.Gentrifying tracts have a much larger change in proportion of bachelors+ population than intensely gentrifying tracts but lower changes in income per capita, median housing and rent values as compared to intensely gentrifying tracts. A possibility is that the recent influx of bachelors+ population in the "gentrifying" tracts will over time push these tracts into "intense gentrification."
 
 ## Spatially visualizing our clusters: 
 ![Figure 6](./assets/clustering_map.png)
@@ -99,19 +101,6 @@ I now attempt to predict the probability of gentrification of a census tract ove
 - **A random forest is used. Due to the class imbalance in the data set (19% as gentrifying), we generate synthetic data from the minority class in the training set using Synthetic Minority Oversampling Technique (SMOTE).**
 - Our feature selection is based on what initial characteristics a tract may have, that may qualify it for "gentrification" over the next 10 years. We use the following variables for the tracts in the year 2000, to predict labels ( which itself have been predicted based on a 10-year change). 
 - Features in random forest
-Feature Name  |
-------------- |
-% of reisdent 65+ |
-% of residents below the poverty line|
-% of long term residents in the tract|
-% of vacant houses|
-% of aging housing stock (older than 1980)|
-% of renters rent burdened|
-% of renters|
-% unemployed|
-Average per-capita income |
-Content Cell |
-
   1. % of reisdent 65+ 
   2. % of residents below the poverty line 
   3. % of long term residents in the tract 
@@ -121,15 +110,18 @@ Content Cell |
   7. % of renters 
   8. % unemployed 
   9. Average per-capita income
+  10. 
 - Visualizing some of the variables and how they are spread for each label: 
+- 
 ![Figure 8](./assets/boxplot.png)
 
 - Importantly we see the per capita income spread. As noted previous, "affordable" tracks are not necessarily ones with lower property values and are ones with the highest per capita average incomes, indicating that some the most expensive housing tracts in DC, saw lowest overall changes in housing prices and per capita income in the neighborhood and also saw the highest increases in diversity in their population. 
+
 ![Figure 9](./assets/pcap_income.png)
 
 - We binary encode our gentrification labels: 
-  1. Affordable and stable tracks coded as 0, implying "Not Gentrifying" 
-  2. Gentrifying and intense gentrification tracks, coded as 1, implying "Gentrifying" 
+  1. Affordable and City average tracts coded as 0, implying "Not Gentrifying" 
+  2. Gentrifying and intense gentrification tracts, coded as 1, implying "Gentrifying" 
   
 Because of the class imbalance and low percentage of true positive classes, some of the metrics are more representative of model performance than traditional metrics
 such as accuracy. Additionally, a consideration of the problem context will help evaluate the usefulness of the model. Similar to fraud or medical diagnoses, there may be few positive cases, but a high cost associated with a false negative prediction. In this context, that is predicting a census tract will not gentrify when it actually does gentrify. In such cases where the cost of false negatives is high, recall/sensitivity is a valuable metric.
@@ -152,11 +144,11 @@ The RF model learned heavily from labeled data that the majority of gentrifying 
 ## Probability of tracts gentrifying in 2021. 
 Below we look at the probability of a track becoming gentrified by 2021, based on 2000 tract data (on which the machine was trained and tested).
 ![Figure 11](./assets/probability.png)
-We find that the machine has to some degree more false positives as compared to the labels in figure 6. Most of the predictions, forecasting >50% chance of gentrification focuses on the region east of the Anacostsia. Specifically, ward 7 and ward 8 have been correctly identified at a high risk of gentrification, an important issue currently. 
+We find that the machine has to some degree more false positives as compared to the labels in figure 6. Most of the predictions, forecasting >50% chance of gentrification focuses on the region east of the Anacostsia. Specifically, multiple tracts in ward 7 and ward 8 have been correctly identified at a high risk of gentrification, an important issue currently. 
 
 ## Final Use case: Which tracts will be gentrified in 2030
 Below we look at the probability of a track becoming gentrified by 2030, based on 2021 tract data 
 ![Figure 11](./assets/probability2031.png)
 
-Many of the previously identified areas continue to be identified as gentrified, especially east of the Anacostsia. This is expected, since gentrification often happens over a span of 20-30 years. A few new areas have also been identified, but more importantly many of the areas currently idetified as gentrifying have not been highlighted to be so in 2030, indicating that they will be fully gentrified and become high income areas. It is therefore important to carefully evaluate these changing patterns and undertake interventions such as te Minneapolis 2040 plan, which aim to create "mixed" neighborhoods, to reduce population displacement. 
+Many of the previously identified areas continue to be identified as gentrified, especially east of the Anacostsia. This is expected, since gentrification often happens over a span of 20-30 years. A few new areas have also been identified, but more importantly many of the areas currently idetified as gentrifying have not been highlighted to be so in 2030, indicating that they will be fully gentrified and become high income areas. It is therefore important to carefully evaluate these changing patterns and undertake interventions such as te Minneapolis 2040 plan, which aim to create "mixed" neighborhoods, to reduce population displacement. These areas provide important insights which require not only government interventions, but provide an important agenda to local neighborhood advocates, as an early warning sign.
 

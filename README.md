@@ -18,9 +18,12 @@ Gentrification is a legacy of historical patterns of residential restructuring t
 While there are multiple classifications of gentrification, the general patterns from a spacial point view does provide a succint definition: A sustained period of disinvestment, followed by an influx of investment and wealthier residents, in some cases correlated with race,  that results in the displacement of existing residents
 
 ## Defining gentrification and unsupervised clustering 
-Most of the disagreement in gentrification surrounds the methodological differences used to measure gentrification.Galster and Peacock noted "”If one
+Most of the disagreement in gentrification surrounds the methodological differences used to measure gentrification. Galster and Peacock noted "If one
 wants to better understand, predict and even alter changes in urban neighborhoods, one thus must be exceedingly careful in operationally specifying the exact dynamic in question, and must recognize that such a specification may, in itself, influence the outcome of the analysis." 
-The table below highlights the differences in he primarily used methods of identifying gentrification.
+The table below highlights the differences in the primarily used methods of identifying gentrification.
+
+(./assets/gent_df.png)
+
 In addition to the inconsistent metrics applied within these frameworks, there are issues of confirmation bias and limits to the number of dimensions that they are capable of capturing. These prescriptive, threshold approaches suffer from confirmation bias by assuming a priori that gentrification is a significant neighborhood-shaping process within the region and time period of interest
 
 **Clustering methods have several advantages over traditional threshold-based methods. They allow for the creation of homogenous subgroups based on the data itself, rather than on a predetermined framework. They also allow for the incorporation of multiple variables that can capture the complexity of neighborhood change. Additionally, clustering methods are less biased than traditional methods, as they do not make assumptions about the underlying phenomena before analyzing the data. In contrast, traditional methods rely on city-wide values and are prone to confirmation bias, meaning that they may be more likely to identify gentrification or other pre-determined types of neighborhood change, regardless of the specific city or time period being analyzed.**
